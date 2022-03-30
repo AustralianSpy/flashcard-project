@@ -41,7 +41,7 @@ export default function DeckList( decks = []) {
                         </Link>
                     </div>
                     <div className="col-4">
-                        <Link className="btn btn-danger m-1 justify-self-end">
+                        <Link className="btn btn-danger my-1 ml-4 justify-self-end">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"

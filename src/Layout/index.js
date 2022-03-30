@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import CreateDeckBtn from './Components/CreateDeckBtn';
-import DeckList from './DeckCrud/DeckList';
+import Deck from './DeckCrud/ViewDeck';
+import DeckList from './DeckList';
 import Header from './Header';
 import NotFound from './NotFound';
+import Card from './CardCrud/Card';
 
 /*
 TODO: fetch a list of decks, map to individual modules.
