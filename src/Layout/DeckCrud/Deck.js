@@ -4,6 +4,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import BreadcrumbBar from '../Components/BreadcrumbBar';
 import ViewDeck from './ViewDeck';
 import EditDeck from './EditDeck';
+import CreateDeck from './CreateDeck';
 import AddCard from '../CardCrud/AddCard';
 import EditCard from '../CardCrud/EditCard';
 
@@ -16,6 +17,9 @@ export default function Deck() {
             <Switch>
                 <Route exact path={path}>
                     <ViewDeck />
+                </Route>
+                <Route path={`${path}/new`}>
+                    <CreateDeck />
                 </Route>
                 <Route path={`${path}/edit`}>
                     <EditDeck />

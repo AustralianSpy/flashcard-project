@@ -3,6 +3,7 @@ import { useRouteMatch, Link } from 'react-router-dom';
 
 export default function DeckThumbnail({ deck }) {
     const { id, name, description, cards } = deck;
+    const { url } = useRouteMatch();
     // use id for navigation to view, study, and delete... pass it on through params.
     
     const viewDeckHandler = () => {
@@ -14,7 +15,7 @@ export default function DeckThumbnail({ deck }) {
     }
 
     const deleteDeckHandler = () => {
-        
+
     }
 
     return (
@@ -29,7 +30,7 @@ export default function DeckThumbnail({ deck }) {
                 <p className="card-text">{description}</p>
                 <div className="row">
                     <div className="col-8">
-                        <Link to='#' className="btn btn-secondary">
+                        <Link to={`/decks/${id}/study`} className="btn btn-secondary">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16" height="16"

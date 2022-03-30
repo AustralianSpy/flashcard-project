@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { listDecks } from '../utils/api';
 
 import CreateDeckBtn from './Components/CreateDeckBtn';
+import Deck from './DeckCrud/Deck';
 import ListDecks from './DeckList/ListDecks';
 import Header from './Header';
 import NotFound from './NotFound';
 
 
 function Layout() {
-  const { path } = useRouteMatch();
   const [decks, setDecks] = useState([]);
 
   useEffect(() => {
@@ -32,9 +32,12 @@ function Layout() {
       <Header />
       <div className="container">
         <Switch>
-          <Route exact path={path}>
+          <Route exact path='/'>
             <CreateDeckBtn />
             <ListDecks decks={decks} />
+          </Route>
+          <Route path='/decks'>
+            <Deck />
           </Route>
           <Route>
             <NotFound />
