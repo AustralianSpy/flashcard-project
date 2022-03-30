@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import CreateDeckBtn from './Components/CreateDeckBtn';
 import DeckList from './DeckCrud/DeckList';
 import Header from './Header';
@@ -11,14 +11,22 @@ TODO: routing.
 */
 
 function Layout() {
+  const { path } = useRouteMatch();
+  
   return (
     <>
       <Header />
       <div className="container">
-        <CreateDeckBtn />
-        <DeckList />
-        <NotFound />
-      </div>
+        <Switch>
+          <Route exact path={path}>
+            <CreateDeckBtn />
+            <DeckList />
+          </Route>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
+    </div>
     </>
   );
 }
