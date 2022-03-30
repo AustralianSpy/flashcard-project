@@ -1,18 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { listDecks } from '../utils/api';
+
 import CreateDeckBtn from './Components/CreateDeckBtn';
 import ListDecks from './DeckList/ListDecks';
 import Header from './Header';
 import NotFound from './NotFound';
 
-/*
-TODO: fetch a list of decks, map to individual modules.
-TODO: routing.
-*/
 
 function Layout() {
   const { path } = useRouteMatch();
-  const decks = [];
+  const [decks, setDecks] = useState([]);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    const fetchData = async () => {
+      try {
+        const response = await listDecks(abortController.signal);
+        setDecks([...response]);
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    fetchData();
+    return () => { abortController.abort() };
+  }, [])
   
   return (
     <>
@@ -21,10 +34,7 @@ function Layout() {
         <Switch>
           <Route exact path={path}>
             <CreateDeckBtn />
-            {/*
-              Render ListDecks only if there ARE decks.
-              <ListDecks decks={decks} />
-            */}
+            <ListDecks decks={decks} />
           </Route>
           <Route>
             <NotFound />
