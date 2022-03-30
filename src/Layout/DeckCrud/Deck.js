@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import BreadcrumbBar from './Components/BreadcrumbBar';
-import ViewDeck from './DeckCrud/ViewDeck';
-import EditDeck from './DeckCrud/EditDeck';
-import AddCard from './CardCrud/AddCard';
-import EditCard from './CardCrud/EditCard';
+import BreadcrumbBar from '../Components/BreadcrumbBar';
+import ViewDeck from './ViewDeck';
+import EditDeck from './EditDeck';
+import AddCard from '../CardCrud/AddCard';
+import EditCard from '../CardCrud/EditCard';
 
 export default function Deck() {
     const { path } = useRouteMatch();

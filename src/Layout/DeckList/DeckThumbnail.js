@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Switch, useRouteMatch, Link } from 'react-router-dom';
+import React from 'react';
+import { useRouteMatch, Link } from 'react-router-dom';
 
-export default function DeckList( decks = []) {
-
+export default function DeckThumbnail(deck = []) {
+    const { id, name, description, cards } = deck;
+    // use id for navigation to view, study, and delete... pass it on through params.
+    
     return (
         <div className="card">
             <div className="card-body">
                 <div className="row">
-                    <h3 className="card-title col-9">Placeholder</h3>
+                    <h3 className="card-title col-9">{name}</h3>
                     <p className="card-text col-3">
-                        <small className="text-muted"># of cards</small>
+                        <small className="text-muted">{cards.length} cards</small>
                     </p>
                 </div>
-                <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero aspernatur ad incidunt, ullam dignissimos voluptas alias. Voluptatum officiis voluptatem, illum quae voluptatibus sunt ut impedit distinctio beatae velit laboriosam quibusdam?</p>
+                <p className="card-text">{description}</p>
                 <div className="row">
                     <div className="col-8">
                         <Link className="btn btn-secondary">
