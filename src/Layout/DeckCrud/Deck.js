@@ -5,7 +5,7 @@ import BreadcrumbBar from '../Components/BreadcrumbBar';
 import ViewDeck from './ViewDeck';
 import EditDeck from './EditDeck';
 import CreateDeck from './CreateDeck';
-import AddCard from '../CardCrud/AddCard';
+import AddCard from '../CardCrud/CreateCard';
 import EditCard from '../CardCrud/EditCard';
 
 export default function Deck() {
@@ -24,7 +24,7 @@ export default function Deck() {
                 <Route path={`${path}/edit`}>
                     <EditDeck />
                 </Route>
-                <Route path={`$`}>
+                <Route path={`${path}/cards`}>
                     <AddCard />
                 </Route>
                 <Route>
