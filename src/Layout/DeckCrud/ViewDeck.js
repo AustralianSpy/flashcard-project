@@ -1,15 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useRouteMatch } from 'react-router-dom';
+import { readDeck } from '../../utils/api';
 
-export default function ViewDeck() {
+export default function ViewDeck({ nav }) {
+    const [deck, setDeck] = useState({});
+    const { deckId } = useParams();
+    const { url } = useRouteMatch()
+
+    // fetch the information for the deck.
+    useEffect(() => {
+        const abortController = new AbortController();
+        const fetchData = async () => {
+        try {
+            const response = await readDeck(deckId, abortController.signal);
+            setDeck({...response});
+        } catch (error) {
+            throw error;
+        }
+    }
+        fetchData();
+        return () => { abortController.abort() };
+    }, [deckId]);
+
+    // change page-title to reflect deck.
+    useEffect(() => {
+        (deck.name) ?
+            document.title = `${deck.name}` :
+            document.title = `View Deck`;
+    }, [deck]);
+
+    // set breadcrumbs for navigation.
+    useEffect(() => {
+        const crumbs = [
+            {
+                name: `${deck.name}`,
+                url: `${url}`,
+            }
+        ];
+        nav(crumbs);
+    }, [deck, nav, url]);
+    
     return (
         <div className="card">
             <div className="card-body">
-                <h3 className="card-title">Deck Title</h3>
-                <p className="card-text">Information about the deck.</p>
+                <h3 className="card-title">{deck.name}</h3>
+                <p className="card-text">{deck.description}</p>
                 <div className="row">
                     <div className="col-10">
-                        <Link className="btn btn-secondary">
+                        <Link to={`${url}/edit`} className="btn btn-secondary">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16" height="16"
@@ -20,7 +58,7 @@ export default function ViewDeck() {
                             </svg>
                             Edit
                         </Link>
-                        <Link href="#" className="btn btn-primary ml-1">
+                        <Link to={`${url}/study`} className="btn btn-primary ml-1">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16" height="16"
@@ -48,7 +86,7 @@ export default function ViewDeck() {
                         </Link>
                     </div>
                     <div className="col-2">
-                        <Link className="btn btn-danger justify-self-end">
+                        <Link to='/' className="btn btn-danger justify-self-end">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
@@ -58,7 +96,7 @@ export default function ViewDeck() {
                                 viewBox="0 0 16 16"
                             >
                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                             </svg>
                         </Link>
                     </div>

@@ -3,7 +3,8 @@ import { Route, Switch, useRouteMatch, Link } from 'react-router-dom';
 
 // pass card info down as props... needs question, answer, and id
 
-export default function Card() {
+export default function Card({ card }) {
+    
     return (
         <div className="card">
             <div className="card-body">

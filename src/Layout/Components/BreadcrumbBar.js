@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useRouteMatch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 /*
     This bar is used by these Deck CRUD components for navigation:
@@ -8,17 +8,17 @@ import { useParams, useRouteMatch, Link } from 'react-router-dom';
     Will need to grap ids from params to access titles for crumbs.
 */
 
-export default function BreadcrumbBar() {
-    const { url } = useRouteMatch();
-    const { deckId, cardId } = useParams();
-
-    // add function to check if deckId and cardId exist
-    // map two new breadcrumb lis, one for each if they exist
+export default function BreadcrumbBar({ breadcrumbs }) {
+    // set state of breadcrumbs in Deck, to be updated by each component.
+    // each component must add an OBJECT to an array of breadcrumbs as such:
+    // [ { name: pageName, url: urlPath }, ... ]
+    // map breadcrumb array AFTER initial home breadcrumb
+    // give last item in array the class of ACTIVE
 
     return (
         <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
-                <li className="breadcrumb-item">
+                <li key='0' className="breadcrumb-item">
                     <Link to='/'>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -32,6 +32,16 @@ export default function BreadcrumbBar() {
                     Home
                     </Link>
                 </li>
+                {
+                    breadcrumbs.length > 0 &&
+                    breadcrumbs.map((crumb) => (
+                        <li key={breadcrumbs.indexOf(crumb) + 1} className="breadcrumb-item">
+                            <Link to={`${crumb.url}`}>
+                                {crumb.name}
+                            </Link>
+                        </li>
+                    ))
+                }
             </ol>
         </nav>
     );
