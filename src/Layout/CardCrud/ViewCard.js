@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Switch, useRouteMatch, Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 // pass card info down as props... needs question, answer, and id
 
@@ -21,7 +21,7 @@ export default function Card({ card }) {
                             </p>
                         </div>
                         <div className="row justify-content-end">
-                            <Link className="btn btn-secondary">
+                            <Link to={{}} className="btn btn-secondary">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="16" height="16"
@@ -32,7 +32,7 @@ export default function Card({ card }) {
                                 </svg>
                                 Edit
                             </Link>
-                            <Link className="btn btn-danger mx-2">
+                            <Link to={{}} className="btn btn-danger mx-2">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="16"

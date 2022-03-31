@@ -8,7 +8,7 @@ import CreateDeck from './CreateDeck';
 import Card from '../CardCrud/Card';
 import Study from './Study';
 
-export default function Deck() {
+export default function Deck({ handleDeleteDeck }) {
     const { path } = useRouteMatch();
     
     // logic to handle the state of the breadcrumb bar without
@@ -38,7 +38,7 @@ export default function Deck() {
                     <CreateDeck nav={handleBreadcrumbs} />
                 </Route>
                 <Route exact path={`${path}/:deckId`}>
-                    <ViewDeck nav={handleBreadcrumbs} />
+                    <ViewDeck nav={handleBreadcrumbs} handleDeleteDeck={handleDeleteDeck} />
                 </Route>
                 <Route path={`${path}/:deckId/edit`}>
                     <EditDeck nav={handleBreadcrumbs} />

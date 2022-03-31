@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { listDecks } from '../utils/api';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import { deleteDeck, listDecks } from '../utils/api';
 
 import CreateDeckBtn from './Components/CreateDeckBtn';
 import Deck from './DeckCrud/Deck';
@@ -11,7 +11,9 @@ import NotFound from './NotFound';
 
 function Layout() {
   const [decks, setDecks] = useState([]);
+  const history = useHistory();
 
+  // fetch list of all decks of cards, if any.
   useEffect(() => {
     const abortController = new AbortController();
     const fetchData = async () => {
@@ -25,7 +27,28 @@ function Layout() {
 
     fetchData();
     return () => { abortController.abort() };
-  }, [])
+  }, []);
+
+  // handle the deletion of decks... declared here to pass down to multiple
+  // components instead of re-defining. on confirming modal dialog, request
+  // is sent for deletion. if successful, return to home page.
+  const handleDeleteDeck = (idToDelete) => {
+    if (window.confirm('Do you really want to delete this deck?')){
+      const abortController = new AbortController();
+      const deleteRequest = async () => {
+        try {
+          const response = await deleteDeck(idToDelete, abortController.signal);
+          console.log('Deck deleted:', response);
+          history.push('/');
+        } catch (error) {
+          throw error;
+        }
+      }
+      deleteRequest();
+
+      return () => { abortController.abort() };
+    }
+  };
   
   return (
     <>
@@ -34,10 +57,10 @@ function Layout() {
         <Switch>
           <Route exact path='/'>
             <CreateDeckBtn />
-            <ListDecks decks={decks} />
+            <ListDecks decks={decks} handleDeleteDeck={handleDeleteDeck} />
           </Route>
           <Route path='/decks'>
-            <Deck />
+            <Deck handleDeleteDeck={handleDeleteDeck} />
           </Route>
           <Route>
             <NotFound />

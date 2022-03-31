@@ -1,28 +1,30 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { updateDeck } from '../../utils/api';
+import React from 'react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import { createDeck, updateDeck } from '../../utils/api';
 
-export default function DeckForm({ deckProps = {id: '', name: '', description: ''} }) {
-    const [deck, setDeck] = useState({...deckProps});
-    const history = useHistory()
+export default function DeckForm({ deck = {id: '', name: '', description: ''}, handleChange }) {
+    const history = useHistory();
+    const { path } = useRouteMatch();
 
-    // handlers for form, including controlled inputs and submission.
-    const handleChange = ({ target }) => {
-        setDeck({
-            ...deck,
-            [target.name]: target.value,
-        });
-    };
-
+    // submission and cancellation handlers for form.
     const handleSubmit = (event) => {
         event.preventDefault();
         const abortController = new AbortController();
         const submitData = async () => {
-            try {
-                const response = await updateDeck(deck, abortController.signal);
-                history.push(`/decks/${response.id}`);
-            } catch (error) {
-                throw error;
+            if (path === '/decks/new'){
+                try {
+                    const response = await createDeck(deck, abortController.signal);
+                    history.push(`/decks/${response.id}`);
+                } catch (error) {
+                    throw error;
+                }
+            } else if (path === '/decks/:deckId/edit'){
+                try {
+                    const response = await updateDeck(deck, abortController.signal);
+                    history.push(`/decks/${response.id}`);
+                } catch (error) {
+                    throw error;
+                }
             }
         }
         submitData();
@@ -36,11 +38,10 @@ export default function DeckForm({ deckProps = {id: '', name: '', description: '
     }
 
     return (
-        <div className="container mt-5">
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name" className='text-uppercase font-weight-bold'>Deck Name:</label>
-                    <input type="text" className='form-control' id='name' onChange={handleChange} value={deck.name} />
+                    <input type="text" className='form-control' id='name' name='name' onChange={handleChange} value={deck.name} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="description" className='text-uppercase font-weight-bold'>Description:</label>
@@ -52,6 +53,5 @@ export default function DeckForm({ deckProps = {id: '', name: '', description: '
                     <button className="btn btn-primary" type="submit">Submit</button>
                 </div>
             </form>
-        </div>
     );
 }
