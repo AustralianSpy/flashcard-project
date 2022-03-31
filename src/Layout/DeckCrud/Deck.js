@@ -14,7 +14,7 @@ export default function Deck() {
     // logic to handle the state of the breadcrumb bar without
     // re-implimenting the bar on every page.
     const [breadcrumbs, setBreadcrumbs] = useState([]);
-    const handleBreadcrumbs = useCallback((crumbs) => {
+    const handleBreadcrumbs = useCallback((crumbs = []) => {
         // take in an array of objects, hard-coded on each component
         /* 
             {

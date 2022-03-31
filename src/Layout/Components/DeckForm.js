@@ -1,49 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useRouteMatch, useHistory } from 'react-router-dom';
-import { readDeck, updateDeck } from '../../utils/api';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { updateDeck } from '../../utils/api';
 
-export default function EditDeck({ nav }) {
-    const [deck, setDeck] = useState({ id: '', name: '', description: ''});
-    const { deckId } = useParams();
-    const { url } = useRouteMatch();
-    const history = useHistory();
-
-    // fetch the information for the deck.
-    useEffect(() => {
-        const abortController = new AbortController();
-        const fetchData = async () => {
-        try {
-            const response = await readDeck(deckId, abortController.signal);
-            setDeck({...response});
-        } catch (error) {
-            throw error;
-        }
-    }
-        fetchData();
-        return () => { abortController.abort() };
-    }, [deckId]);
-
-    // change page-title to reflect deck.
-    useEffect(() => {
-        (deck.name) ?
-            document.title = `Edit ${deck.name}` :
-            document.title = `Edit Deck`;
-    }, [deck]);
-
-    // set breadcrumbs for navigation.
-    useEffect(() => {
-        const crumbs = [
-            {
-                name: `${deck.name}`,
-                url: `/decks/${deck.id}`,
-            },
-            {
-                name: `Edit Deck`,
-                url: `${url}`,
-            },
-        ];
-        nav(crumbs);
-    }, [deck, nav, url]);
+export default function DeckForm({ deckProps = {id: '', name: '', description: ''} }) {
+    const [deck, setDeck] = useState({...deckProps});
+    const history = useHistory()
 
     // handlers for form, including controlled inputs and submission.
     const handleChange = ({ target }) => {
@@ -75,8 +36,7 @@ export default function EditDeck({ nav }) {
     }
 
     return (
-        <div className="container mb-5">
-            <h2 className='mb-4'>Edit the deck.</h2>
+        <div className="container mt-5">
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name" className='text-uppercase font-weight-bold'>Deck Name:</label>
