@@ -39,7 +39,7 @@ export default function CardForm({ card = {front: '', back: '', deckId: ''}, han
     }
 
     return (
-            <form onSubmit={handleSubmit} className='mb-3'>
+            <form onSubmit={handleSubmit} className='mb-5'>
                 <div className="form-group">
                     <label htmlFor="front" className='text-uppercase font-weight-bold'>Card Front:</label>
                     <textarea className='form-control' id='front' name='front' cols="30" rows="5" onChange={handleChange} value={card.front} />

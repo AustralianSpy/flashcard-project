@@ -39,7 +39,7 @@ function Layout() {
         try {
           const response = await deleteDeck(idToDelete, abortController.signal);
           console.log('Deck deleted:', response);
-          history.push('/');
+          window.location.reload();
         } catch (error) {
           throw error;
         }
