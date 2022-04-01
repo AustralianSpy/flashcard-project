@@ -1,24 +1,20 @@
 import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import BreadcrumbBar from '../Components/BreadcrumbBar';
 import EditCard from './EditCard';
 import CreateCard from './CreateCard';
 
-export default function Deck() {
+export default function Card({ nav }) {
     const { path } = useRouteMatch();
     
     return (
-        <section className="container">
-            <BreadcrumbBar />
             <Switch>
                 <Route path={`${path}/new`}>
-                    <CreateCard />
+                    <CreateCard nav={nav} />
                 </Route>
                 <Route path={`${path}/:cardId/edit`}>
-                    <EditCard />
+                    <EditCard nav={nav} />
                 </Route>
             </Switch>
-        </section>
     );
 }
