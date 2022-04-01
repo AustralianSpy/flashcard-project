@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useRouteMatch } from 'react-router-dom';
 import { readDeck } from '../../utils/api';
 
-export default function Study({ nav }) {
+export default function StudyDeck({ nav }) {
     const [deck, setDeck] = useState({});
     const { deckId } = useParams();
     const { url } = useRouteMatch();
@@ -44,5 +44,11 @@ export default function Study({ nav }) {
         nav(crumbs);
     }, [deck, nav, url]);
 
-    return <h2>Study your deck.</h2>;
+    return (
+        (deck.name) ?
+        <div className="container">
+            <h2>Study: {deck.name}</h2>
+        </div> :
+        null
+    );
 }

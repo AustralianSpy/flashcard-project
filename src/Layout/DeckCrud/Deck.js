@@ -6,7 +6,7 @@ import ViewDeck from './ViewDeck';
 import EditDeck from './EditDeck';
 import CreateDeck from './CreateDeck';
 import Card from '../CardCrud/Card';
-import Study from './Study';
+import StudyDeck from './StudyDeck';
 
 export default function Deck({ handleDeleteDeck }) {
     const { path } = useRouteMatch();
@@ -47,7 +47,7 @@ export default function Deck({ handleDeleteDeck }) {
                     <Card nav={handleBreadcrumbs} />
                 </Route>
                 <Route path={`${path}/:deckId/study`}>
-                    <Study nav={handleBreadcrumbs} />
+                    <StudyDeck nav={handleBreadcrumbs} />
                 </Route>
             </Switch>
         </section>
