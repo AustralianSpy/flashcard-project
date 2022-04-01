@@ -5,11 +5,6 @@ import { readDeck } from '../../utils/api';
 import CardForm from '../Components/CardForm';
 
 export default function AddCard({ nav }) {
-    // assessment requires a request for the entire deck, however i think grabbing the
-    // deckId from params to make a POST request would have
-    // been fine, considering the child form only requires the deckId.
-    // no reason to re-request what i already have.
-
     const [deck, setDeck] = useState({});
     const [card, setCard] = useState({})
     const { deckId } = useParams();

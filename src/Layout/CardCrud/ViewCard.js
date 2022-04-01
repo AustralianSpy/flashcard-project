@@ -21,7 +21,7 @@ export default function Card({ card, handleDelete }) {
                             </p>
                         </div>
                         <div className="row justify-content-end">
-                            <Link to={{}} className="btn btn-secondary">
+                            <Link to={`/decks/${card.deckId}/cards/${card.id}/edit`} className="btn btn-secondary">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="16" height="16"

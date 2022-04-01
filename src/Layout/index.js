@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { deleteDeck, listDecks } from '../utils/api';
 
 import CreateDeckBtn from './Components/CreateDeckBtn';
@@ -11,7 +11,6 @@ import NotFound from './NotFound';
 
 function Layout() {
   const [decks, setDecks] = useState([]);
-  const history = useHistory();
 
   // fetch list of all decks of cards, if any.
   useEffect(() => {
