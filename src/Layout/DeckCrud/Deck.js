@@ -22,7 +22,7 @@ export default function Deck({ handleDeleteDeck }) {
                 url: '',
             };
         */
-        // if on Home page, clear breadcrumbs.
+        // if on Home page, clear state of breadcrumbs.
         if (!crumbs.length) {
             setBreadcrumbs([]);
         } else {

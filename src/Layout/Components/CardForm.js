@@ -2,12 +2,16 @@ import React from 'react';
 import { useHistory, useRouteMatch, useParams } from 'react-router-dom';
 import { updateCard, createCard } from '../../utils/api';
 
+// form used for both editing and creating cards.
+
 export default function CardForm({ card = {front: '', back: '', deckId: ''}, handleChange }) {
     const history = useHistory();
     const { path } = useRouteMatch();
     const { deckId } = useParams();
 
     // submission and cancellation handlers for form.
+    // submission call creates or updates a card depending on current path.
+    // cancellation goes back to the previous screen (deck screen).
     const handleSubmit = (event) => {
         event.preventDefault();
         const abortController = new AbortController();

@@ -2,11 +2,15 @@ import React from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { createDeck, updateDeck } from '../../utils/api';
 
+// form used for both editing and creating decks.
+
 export default function DeckForm({ deck = {id: '', name: '', description: ''}, handleChange }) {
     const history = useHistory();
     const { path } = useRouteMatch();
 
     // submission and cancellation handlers for form.
+    // submission call creates or updates a deck depending on current path.
+    // cancellation goes back to the previous screen (home screen).
     const handleSubmit = (event) => {
         event.preventDefault();
         const abortController = new AbortController();

@@ -4,7 +4,9 @@ import { deleteCard } from '../../utils/api';
 import ViewCard from './ViewCard';
 
 export default function ListCards({ cards }) {
-    // handler to delete a card, passed onto each child.
+    // handler to delete a card, passed onto each child so it can
+    // be assigned to a button. prompt user to confirm this decision.
+    // window reloads if deleting so component will reflect this update.
     const handleDeleteCard = (idToDelete, deckId) => {
         if (window.confirm('Do you really want to delete this card?')){
         const abortController = new AbortController();

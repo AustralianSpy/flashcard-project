@@ -1,7 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-// TODO: link to CreateDeck component
+// button that links to the form to create a new deck of cards.
+// individual component to limit clutter of parent component.
 
 export default function CreateDeckBtn() {
     const history = useHistory();

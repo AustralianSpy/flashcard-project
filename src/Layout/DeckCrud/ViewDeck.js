@@ -3,6 +3,10 @@ import { Link, useParams, useRouteMatch } from 'react-router-dom';
 import { readDeck } from '../../utils/api';
 import ListCards from '../CardCrud/ListCards';
 
+// component displays information about the deck, buttons to edit, study, add cards,
+// and delete the deck. Displays a child component that further lists the cards in
+// the deck, which it receives as props.
+
 export default function ViewDeck({ nav, handleDeleteDeck }) {
     const [deck, setDeck] = useState({});
     const { deckId } = useParams();

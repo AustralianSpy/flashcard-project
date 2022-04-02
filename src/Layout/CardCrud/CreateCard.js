@@ -47,7 +47,9 @@ export default function AddCard({ nav }) {
         nav(crumbs);
     }, [deck, nav, url, deckId]);
 
-    // handle changes made to deck by form, pass down to form as props.
+    // this component handles the state of the card being created, which is
+    // passed down to the form as props. the following handler updates the
+    // state of said card according to user inputs.
     const handleChange = ({ target }) => {
         setCard({
             ...card,

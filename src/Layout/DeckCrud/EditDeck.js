@@ -45,7 +45,9 @@ export default function EditDeck({ nav }) {
         nav(crumbs);
     }, [deck, nav, url]);
 
-    // handle changes made to deck by form, pass down to form as props.
+    // this component handles the state of the deck being created, which is
+    // passed down to the form as props. the following handler updates the
+    // state of said deck according to user inputs.
     const handleChange = ({ target }) => {
         setDeck({
             ...deck,

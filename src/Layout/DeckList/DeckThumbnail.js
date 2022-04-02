@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// thumbnail view of an individual deck, to be displayed on the home screen.
+// allows for viewing, studying, and deletion of the deck.
+
 export default function DeckThumbnail({ deck, handleDelete }) {
     const { id, name, description, cards } = deck;
-    // use id for navigation to view, study, and delete... pass it on through params.
+    // use id for navigation to view, study, and delete.
+    // display the rest of the information as text in thumbnail.
 
     return (
         <div className="card my-3">

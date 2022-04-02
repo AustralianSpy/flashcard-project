@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// pass card info down as props... needs question, answer, and id
+// receives the card info from ListCards and the deletion handler for the card.
 
 export default function Card({ card, handleDelete }) {
     
