@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouteMatch } from 'react-router-dom';
 import { readDeck } from '../../utils/api';
+import StudyCard from '../CardCrud/StudyCard';
 
 export default function StudyDeck({ nav }) {
     const [deck, setDeck] = useState({});
@@ -25,7 +26,7 @@ export default function StudyDeck({ nav }) {
     // change page-title to reflect deck.
     useEffect(() => {
         (deck.name) ?
-            document.title = `Study ${deck.name}` :
+            document.title = `Study: ${deck.name}` :
             document.title = `Study`;
     }, [deck]);
 
@@ -46,8 +47,9 @@ export default function StudyDeck({ nav }) {
 
     return (
         (deck.name) ?
-        <div className="container">
-            <h2>Study: {deck.name}</h2>
+        <div className="pb-4">
+            <h2 className='mb-4'>Study: {deck.name}</h2>
+            <StudyCard cards={deck.cards} />
         </div> :
         null
     );
