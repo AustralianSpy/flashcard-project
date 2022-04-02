@@ -14,7 +14,7 @@ export default function DeckThumbnail({ deck, handleDelete }) {
             <div className="card-body">
                 <div className="row">
                     <h3 className="card-title col-9">{name}</h3>
-                    <p className="card-text col-3">
+                    <p className="card-text d-flex flex-row-reverse col-3">
                         <small className="text-muted">{cards.length} cards</small>
                     </p>
                 </div>
@@ -46,8 +46,8 @@ export default function DeckThumbnail({ deck, handleDelete }) {
                             Study
                         </Link>
                     </div>
-                    <div className="col-4">
-                        <button className="btn btn-danger my-1 ml-4 justify-self-end" onClick={handleDelete}>
+                    <div className="col-4 d-flex flex-row-reverse">
+                        <button className="btn btn-danger my-1 ml-4" onClick={handleDelete}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"

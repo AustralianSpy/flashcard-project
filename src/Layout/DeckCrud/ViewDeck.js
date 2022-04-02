@@ -95,7 +95,7 @@ export default function ViewDeck({ nav, handleDeleteDeck }) {
                                 Add Card
                             </Link>
                         </div>
-                        <div className="col-2">
+                        <div className="col-2 d-flex flex-row-reverse">
                             <button onClick={() => handleDeleteDeck(deck.id)} className="btn btn-danger justify-self-end">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

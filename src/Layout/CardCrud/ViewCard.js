@@ -16,7 +16,7 @@ export default function Card({ card, handleDelete }) {
                     </div>
                     <div className="col-6">
                         <div className="row">
-                            <p className="card-text mb-2">
+                            <p className="card-text mb-5">
                                 {card.back}
                             </p>
                         </div>
