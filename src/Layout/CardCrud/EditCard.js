@@ -59,7 +59,9 @@ export default function EditCard({ nav }) {
                 url: `${url}`
             },
         ];
-        nav(crumbs);
+        if (crumbs[0]['name'] !== 'undefined'){
+            nav(crumbs);
+        }
     }, [deck, nav, url, deckId, cardId]);
 
     // this component handles the state of the card being created, which is

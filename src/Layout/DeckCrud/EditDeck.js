@@ -42,7 +42,9 @@ export default function EditDeck({ nav }) {
                 url: `${url}`,
             },
         ];
-        nav(crumbs);
+        if (crumbs[0]['name'] !== 'undefined'){
+            nav(crumbs);
+        }
     }, [deck, nav, url]);
 
     // this component handles the state of the deck being created, which is

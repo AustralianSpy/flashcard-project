@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 /*
     This bar is used by these Deck CRUD components for navigation:
-        Study, CreateDeck, Deck, EditDeck, AddCard, EditCard.
+        StudyDeck, CreateDeck, Deck, EditDeck, AddCard, EditCard.
 
-    Will need to grap ids from params to access titles for crumbs.
+    Will need to grab ids from params to access titles for crumbs.
 */
 
 export default function BreadcrumbBar({ breadcrumbs }) {
@@ -14,6 +14,7 @@ export default function BreadcrumbBar({ breadcrumbs }) {
     // [ { name: pageName, url: urlPath }, ... ]
     // map breadcrumb array AFTER initial home breadcrumb
     // give last item in array the class of ACTIVE
+    
 
     return (
         <nav aria-label="breadcrumb">
@@ -33,14 +34,20 @@ export default function BreadcrumbBar({ breadcrumbs }) {
                     </a>
                 </li>
                 {
-                    breadcrumbs.length > 0 &&
+                    (breadcrumbs) ?
                     breadcrumbs.map((crumb) => (
+                        (breadcrumbs.indexOf(crumb) === breadcrumbs.length - 1) ?
+                        <li key={breadcrumbs.indexOf(crumb) + 1} className="breadcrumb-item active">
+                            <Link to={`${crumb.url}`} className='text-secondary'>
+                                {crumb.name}
+                            </Link>
+                        </li> :
                         <li key={breadcrumbs.indexOf(crumb) + 1} className="breadcrumb-item">
                             <Link to={`${crumb.url}`}>
                                 {crumb.name}
                             </Link>
                         </li>
-                    ))
+                    )) : null
                 }
             </ol>
         </nav>

@@ -42,7 +42,10 @@ export default function ViewDeck({ nav, handleDeleteDeck }) {
                 url: `${url}`,
             }
         ];
-        nav(crumbs);
+        
+        if (crumbs[0]['name'] !== 'undefined'){
+            nav(crumbs);
+        }  
     }, [deck, nav, url]);
 
     
